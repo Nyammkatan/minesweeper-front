@@ -4,6 +4,7 @@ import { TokenContext } from '../../storage/tokenStorage';
 import { GAME_STATE_MENU_LOGIN, GAME_STATE_RUNNING, STATE_NOT_AUTHORIZED } from '../../utils/constants';
 import { loadGame, newGame } from '../../utils/requests';
 import { CircularProgress } from '@mui/material';
+import GameMenuStyled, { MenuItemBlockStyled } from '../styled/GameMenuStyled';
 
 export const menuButtonStyle = {
     color: 'yellow', 
@@ -73,27 +74,27 @@ const PlayerMenu = ({setUserAuthorizationState, saveGameExists, setMenuState, se
 
     if (loading){
         return (
-            <div className='game-menu'>
+            <GameMenuStyled>
                 <img src='images/cat_normal.png'/>
                 <CircularProgress style={{marginTop: 28, color: 'brown'}}/>
-            </div>
+            </GameMenuStyled>
         );
     }
 
     return (
-        <div className='game-menu'>
+        <GameMenuStyled>
             <img src='images/cat_normal.png'/>
-            <div className='menu-item-block'>
+            <MenuItemBlockStyled>
                 <Button variant="contained" onClick={startANewGame} sx={menuButtonStyle}>New Game</Button>
-            </div>
-            {saveGameExists && <div className='menu-item-block'>
+            </MenuItemBlockStyled>
+            {saveGameExists && <MenuItemBlockStyled>
                   <Button variant="contained" onClick={loadExistingGame} sx={menuButtonStyle}>Load Game</Button>
-            </div>}
-            <div className='menu-item-block'>
+            </MenuItemBlockStyled>}
+            <MenuItemBlockStyled>
                 <Button variant="contained" onClick={logout} sx={menuButtonStyle}>Log Out</Button>
-            </div>    
+            </MenuItemBlockStyled>    
             {error && <div style={{color: 'red'}}>{error}</div>}
-        </div>
+        </GameMenuStyled>
     );
 
 };

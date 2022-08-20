@@ -1,20 +1,22 @@
 import { CircularProgress } from '@mui/material';
 import React from 'react';
 import { TILE_BOMB, TILE_BOMB_CHECKED, TILE_BOMB_CORRECT_MARK, TILE_EMPTY, TILE_MARKED, TILE_NOT_CHECKED } from '../../utils/constants';
-import BombTileContent from './BombTileContent';
-import CorrectMarkedBombContent from './CorrectMarkedBombContent';
-import MarkedTileContent from './MarkedTileContent';
+import TileEmptyStyled from '../styled/TileEmptyStyled';
+import TileStyled from '../styled/TileStyledComponent';
+import BombTileContent from './tileContent/BombTileContent';
+import CorrectMarkedBombContent from './tileContent/CorrectMarkedBombContent';
+import MarkedTileContent from './tileContent/MarkedTileContent';
 
 export const colors = ['darkslateblue', 'crimson', 'lawngreen', 'darkviolet', 'pink', 'cyan', 'springgreen', 'darkred'];
 
 const Tile = ({checkClick, markClick, value, loadingCheck}) => {
 
-    let classNameSelected = false;
+    let StyledComponentSelected = TileStyled;
     if (value == TILE_NOT_CHECKED || value == TILE_MARKED){
-        classNameSelected = 'tile tile-size';
+        StyledComponentSelected = TileStyled;
     } else
     if (value == TILE_EMPTY || value == TILE_BOMB || value == TILE_BOMB_CHECKED || value == TILE_BOMB_CORRECT_MARK || value > 0){
-        classNameSelected = 'tile-empty tile-size';
+        StyledComponentSelected = TileEmptyStyled;
     }
     
     let content = '';
@@ -42,14 +44,14 @@ const Tile = ({checkClick, markClick, value, loadingCheck}) => {
     }
 
     if (loadingCheck){
-        return (<div className={classNameSelected} style={{color: colorSelected}} onClick={checkClick} onContextMenu={mark}>
+        return (<StyledComponentSelected style={{color: colorSelected}} onClick={checkClick} onContextMenu={mark}>
             <CircularProgress style={{width: 32, height: 32}}/>
-        </div>);
+        </StyledComponentSelected>);
     }
 
-    return (<div className={classNameSelected} style={{color: colorSelected}} onClick={checkClick} onContextMenu={mark}>
+    return (<StyledComponentSelected style={{color: colorSelected}} onClick={checkClick} onContextMenu={mark}>
                 {content}
-            </div>);
+            </StyledComponentSelected>);
 
 }
 

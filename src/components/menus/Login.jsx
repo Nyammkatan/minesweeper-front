@@ -4,6 +4,8 @@ import { Box, CircularProgress, TextField } from '@mui/material';
 import { TokenContext } from '../../storage/tokenStorage';
 import { getSaveGame, login } from '../../utils/requests';
 import { GAME_STATE_MENU_REGISTER, GAME_STATE_START_OR_LOAD, STATE_AUTHORIZED } from '../../utils/constants';
+import LinkStyled from '../styled/LinkStyled';
+import GameFormStyled from '../styled/GameFormStyled';
 
 const Login = ({setUserAuthorizationState, setMenuState, setSaveGameExists}) => {
 
@@ -60,7 +62,7 @@ const Login = ({setUserAuthorizationState, setMenuState, setSaveGameExists}) => 
     }
 
     return (
-        <div className='game-form'>
+        <GameFormStyled>
             <Box component="form" onSubmit={handleSubmit} style={{width: 250, minHeight: 250}}>
                 <TextField
                     margin="normal"
@@ -91,13 +93,13 @@ const Login = ({setUserAuthorizationState, setMenuState, setSaveGameExists}) => 
                 {!loading && <Button type="submit">Sign in</Button>}
                 {loading && <CircularProgress />}
                 <div>
-                    <span className='link' onClick={goToRegistration}>Don't have an account? Sign Up</span>
+                    <LinkStyled onClick={goToRegistration}>Don't have an account? Sign Up</LinkStyled>
                 </div>
                 <div style={{color: 'red', marginTop: 10}}>
                     {error}
                 </div>
             </Box>
-        </div>
+        </GameFormStyled>
     );
 
 };

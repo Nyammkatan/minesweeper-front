@@ -4,6 +4,7 @@ import { GAME_STATE_START_OR_LOAD, GAME_STATUS_FAILED, GAME_STATUS_IN_PROCESS, G
 import Tile from '../gameObjects/Tile';
 import { checkTile, getSaveGame, markTile, newGame } from '../../utils/requests';
 import GameInfo from '../gameObjects/GameInfo';
+import GameBoardGridStyled, { TileLineStyled } from '../styled/GameBoardGridStyled';
 
 const Game = ({setMenuState, gameData, setSaveGameExists, setGameData, setPlayerMenuLoading, logout}) => {
 
@@ -169,9 +170,9 @@ const Game = ({setMenuState, gameData, setSaveGameExists, setGameData, setPlayer
                 />);
             }
             gridLines.push(
-                <div className='tile-line'>
+                <TileLineStyled>
                     {line}
-                </div>
+                </TileLineStyled>
             )
         }
     }
@@ -179,7 +180,7 @@ const Game = ({setMenuState, gameData, setSaveGameExists, setGameData, setPlayer
     return (
         <div >
             <GameInfo restartLoading={restartLoading} bombsLeft={bombsNumberRendered} gameStatus={gameStatus} goBack={goToMainMenu} restart={restart}/>
-            {grid && <div className='game-board-grid'>{gridLines}</div>}
+            {grid && <GameBoardGridStyled>{gridLines}</GameBoardGridStyled>}
         </div>
     );
 
