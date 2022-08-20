@@ -5,6 +5,7 @@ import Game from './menus/Game';
 import Login from './menus/Login';
 import PlayerMenu from './menus/PlayerMenu';
 import Register from './menus/Register';
+import GameBoardStyled from './styled/GameBoardStyled';
 
 const GameHolder = (props) => {
 
@@ -60,9 +61,9 @@ const GameHolder = (props) => {
     }
 
     return (
-        <div className='game-board'>
+        <GameBoardStyled>
             {menuSelected}
-        </div>
+        </GameBoardStyled>
     );
 
 };

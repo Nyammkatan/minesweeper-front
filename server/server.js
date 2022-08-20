@@ -6,6 +6,8 @@ import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import App from '../src/App'
 
+import { ServerStyleSheet } from 'styled-components';
+
 const PORT = 3000
 
 const app = express();
@@ -15,8 +17,12 @@ app.use('^/$', (req, resp, next) => {
             console.log(error.toString());
             return resp.status(500).send("Something went wrong");
         }
-        let applicationContent = ReactDOMServer.renderToString(<App/>);
-        return resp.send(data.replace('<div id="root"></div>', `<div id="root">${applicationContent}</div>`));
+        const sheet = new ServerStyleSheet();
+        let applicationContent = ReactDOMServer.renderToString(sheet.collectStyles(<App />));
+        const styles = sheet.getStyleTags();
+        let respData = data.replace('<div id="root"></div>', `<div id="root">${applicationContent}</div>`);
+        respData = respData.replace('<style></style>', styles);
+        return resp.send(respData);
     });
 });
 

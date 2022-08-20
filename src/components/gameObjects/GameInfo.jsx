@@ -1,18 +1,20 @@
 import { CircularProgress } from '@mui/material';
 import React from 'react';
+import styled from 'styled-components';
 import { GAME_STATUS_FAILED, GAME_STATUS_WON } from '../../utils/constants';
+import { GameInfoTopBlockStyled, GameInfoTopBlockElementStyled, GameInfoTopBlockElementPressableStyled } from '../styled/GameInfoTopBlockStyled';
 
 const LoadingCatHead = ({restart}) => {
 
     return(
-        <div className='game-info-top-block-element game-info-top-block-element-pressable' onClick={restart} style={{cursor: 'pointer'}}>
+        <GameInfoTopBlockElementPressableStyled onClick={restart} style={{cursor: 'pointer'}}>
             <div style={{position: 'absolute', top: 2}}>
                 <img src='images/cat_normal.png'/>
             </div>
             <div style={{position: 'absolute'}}>
                 <CircularProgress/> 
             </div>
-        </div>
+        </GameInfoTopBlockElementPressableStyled>
     );
 
 };
@@ -20,9 +22,9 @@ const LoadingCatHead = ({restart}) => {
 const SimpleCatHead = ({restart, statusImageSrc}) => {
 
     return(
-        <div className='game-info-top-block-element game-info-top-block-element-pressable' onClick={restart} style={{cursor: 'pointer'}}>
+        <GameInfoTopBlockElementPressableStyled onClick={restart} style={{cursor: 'pointer'}}>
             <img src={statusImageSrc}/>
-        </div>
+        </GameInfoTopBlockElementPressableStyled>
     );
 
 };
@@ -40,15 +42,15 @@ const GameInfo = ({bombsLeft, gameStatus, restart, goBack, restartLoading}) => {
     const catHead = restartLoading ? <LoadingCatHead restart={restart}/> : <SimpleCatHead restart={restart} statusImageSrc={statusImageSrc}/>
 
     return(
-        <div className='game-info-top-block'>
-            <div className='game-info-top-block-element'>
+        <GameInfoTopBlockStyled>
+            <GameInfoTopBlockElementStyled>
                 {bombsLeft}
-            </div>
+            </GameInfoTopBlockElementStyled>
             {catHead}
-            <div className='game-info-top-block-element game-info-top-block-element-pressable' onClick={goBack} style={{cursor: 'pointer'}}>
+            <GameInfoTopBlockElementPressableStyled onClick={goBack} style={{cursor: 'pointer'}}>
                 <img src='images/go-back.png'/>
-            </div>
-        </div>
+            </GameInfoTopBlockElementPressableStyled>
+        </GameInfoTopBlockStyled>
     );
 
 };
